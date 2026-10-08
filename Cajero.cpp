@@ -1,5 +1,33 @@
-//
-// Created by usuario on 07/10/2026.
-//
+#include <iostream>
 
-#include "Cajero.h"
+using namespace std;
+
+//Crear una cuenta monetaria
+void crearCuenta() {
+
+}
+
+//Operar deposito
+void deposito() {
+
+}
+
+//Operar retiro
+void retiro() {
+
+}
+
+//Realizar Transferencias
+void transferencia() {
+
+}
+
+//Consultar saldo de la cuenta
+void consultarSaldo() {
+
+}
+
+
+int main() {
+    //Menu principal
+}
