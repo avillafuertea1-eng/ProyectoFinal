@@ -49,27 +49,15 @@ int main() {
         cin >> opcion;
 
         switch (opcion) {
-            case 1:
-                crearCuenta();
-                break;
-            case 2:
-                deposito();
-                break;
-            case 3:
-                retiro();
-                break;
-            case 4:
-                transferencia();
-                break;
-            case 5:
-                consultarSaldo();
-                break;
-            case 6:
-                cout << "Salida programa";
-                break;
-            default:
-                cout << "Opcion no valida";
+            case 1:crearCuenta();break;
+            case 2:deposito();break;
+            case 3:retiro();break;
+            case 4:transferencia();break;
+            case 5:consultarSaldo();break;
+            case 6:cout << "Salida programa";break;
+            default:cout << "Opcion no valida.\n";
         }
-
     }while (opcion != 6);
+
+    return 0;
 }
