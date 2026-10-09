@@ -42,8 +42,22 @@ void transferencia() {
 
 //Nombre:
 //Consultar saldo de la cuenta
-void consultarSaldo() {
+int consultarSaldo() {
+    string numero;
 
+    cout << "Ingrese numero de cuenta: ";
+    getline(cin, numero);
+
+    if (existeCuenta(numero) == 0) {
+        cout << "Error: la cuenta no existe." << endl;
+    } else {
+        cout.setf(ios::fixed);
+        cout.precision(2);
+        cout << "Cuenta: " << numero << endl;
+        cout << "Titular: " << obtenerNombre(numero) << endl;
+        cout << "Saldo: Q " << obtenerSaldo(numero) << endl;
+    }
+    return 0;
 }
 
 
