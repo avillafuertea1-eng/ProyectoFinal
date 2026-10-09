@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>   // Para utilizar archivos
+#include <string>    // Para utilizar cadenas
+#include <sstream>   // Para usar stringstream, convierte cadena en un flujo de caracteres
 //esto es una prueba de como hacer un commit
 using namespace std;
 
