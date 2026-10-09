@@ -2,8 +2,10 @@
 #include <fstream>   // Para utilizar archivos
 #include <string>    // Para utilizar cadenas
 #include <sstream>   // Para usar stringstream, convierte cadena en un flujo de caracteres
-//esto es una prueba de como hacer un commit
+
 using namespace std;
+
+//Cuando trabajen en su parte coloquen su nombre y apellido en donde dice "Nombre:", asi sabemos quien trabajo en su parte
 
 //Nombre:
 //Crear una cuenta monetaria
