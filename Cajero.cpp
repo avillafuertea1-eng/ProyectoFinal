@@ -16,7 +16,21 @@ void deposito() {
 
 //Nombre:
 //Operar retiro
-void retiro() {
+void retiro() {string numCuentaBusqueda;
+    double montoRetiro;
+
+    cout << "\n=== OPERAR RETIRO ===\n";
+    cout << "Ingrese el numero de cuenta: ";
+    cin >> numCuentaBusqueda;
+
+    cout << "Ingrese el monto a retirar: ";
+    cin >> montoRetiro;
+
+    // Validar que el monto sea positivo (MONTO > 0)
+    if (montoRetiro <= 0) {
+        cout << "Error: El monto a retirar debe ser mayor a 0.\n";
+        return;
+    }
 
 }
 
