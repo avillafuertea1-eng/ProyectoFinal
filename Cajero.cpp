@@ -7,7 +7,7 @@ using namespace std;
 
 // Comprueba que la cuenta exista: devuelve 1 si existe, 0 si no existe
 int existeCuenta(string numero) {
-    ifstream archivo("CTASMONETARIAS.txt");
+    ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num;
     int existe = 0;
 
@@ -24,7 +24,7 @@ int existeCuenta(string numero) {
 
 // Devuelve el saldo actual de una cuenta
 float obtenerSaldo(string numero) {
-    ifstream archivo("CTASMONETARIAS.txt");
+    ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num, nom, tel, cor, saldo_str;
     float saldo = 0;
 
@@ -46,7 +46,7 @@ float obtenerSaldo(string numero) {
 
 // Devuelve el nombre de la persona de la cuenta
 string obtenerNombre(string numero) {
-    ifstream archivo("CTASMONETARIAS.txt");
+    ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num, nom, nombre = "";
 
     while (getline(archivo, linea)) {
@@ -64,7 +64,7 @@ string obtenerNombre(string numero) {
 // Suma 'monto' al saldo de la cuenta para restar se envia negativo
 
 int actualizarSaldo(string numero, float monto) {
-    ifstream archivo("CTASMONETARIAS.txt");
+    ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num, nom, tel, cor, saldo_str, contenido = "";
     float saldo;
 
@@ -91,7 +91,7 @@ int actualizarSaldo(string numero, float monto) {
     }
     archivo.close();
 
-    ofstream salida("CTASMONETARIAS.txt");   // Reemplaza el contenido
+    ofstream salida("cuentas/CTASMONETARIAS.txt");   // Reemplaza el contenido
     salida << contenido;
     salida.close();
     return 0;
@@ -115,9 +115,7 @@ float leerMonto(string mensaje) {
     return monto;
 }
 
-// =====================================================================
 // CREAR CUENTA MONETARIA
-// =====================================================================
 int crearCuenta() {
     ofstream archivo;
     string numero, nombre, telefono, correo;
@@ -136,9 +134,10 @@ int crearCuenta() {
         getline(cin, correo);
 
         // Abrir archivo en modo append (ios::app)
-        archivo.open("CTASMONETARIAS.txt", ios::app);
+        archivo.open("cuentas/CTASMONETARIAS.txt", ios::app);
 
         if (!archivo) {
+            cin.ignore();
             cout << "No se pudo abrir el archivo." << endl;
         } else {
             archivo << numero << "|" << nombre << "|" << telefono << "|" << correo << "|" << "0" << endl;
@@ -149,9 +148,7 @@ int crearCuenta() {
     return 0;
 }
 
-// =====================================================================
 //OPERAR DEPOSITO
-// =====================================================================
 int operarDeposito() {
     string numero;
     float monto;
@@ -169,9 +166,7 @@ int operarDeposito() {
     return 0;
 }
 
-// =====================================================================
 // OPERAR RETIRO
-// =====================================================================
 int operarRetiro() {
     string numero;
     float monto;
@@ -193,9 +188,7 @@ int operarRetiro() {
     return 0;
 }
 
-// =====================================================================
 // REALIZAR TRANSFERENCIA
-// =====================================================================
 int realizarTransferencia() {
     string origen, destino;
     float monto;
@@ -222,9 +215,7 @@ int realizarTransferencia() {
     return 0;
 }
 
-// =====================================================================
 // CONSULTAR SALDO DE CUENTA
-// =====================================================================
 int consultarSaldo() {
     string numero;
 
@@ -243,15 +234,13 @@ int consultarSaldo() {
     return 0;
 }
 
-// =====================================================================
 // MENU PRINCIPAL
-// =====================================================================
 int main() {
     int opcion = 0;
     ofstream archivo;
 
     // Si el archivo no existe, se crea desde el inicio (modo append)
-    archivo.open("CTASMONETARIAS.txt", ios::app);
+    archivo.open("cuentas/CTASMONETARIAS.txt", ios::app);
     archivo.close();
 
     while (opcion != 6) {
