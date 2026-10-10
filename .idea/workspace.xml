@@ -16,7 +16,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca84f74b-563c-4b3e-8867-3f2122e39999" name="Changes" comment="" />
+    <list default="true" id="ca84f74b-563c-4b3e-8867-3f2122e39999" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CTASMONETARIAS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CTASMONETARIAS.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cajero.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Cajero.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +63,7 @@
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "Merging feature/menu",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "F:/ANGEL/ARCHIVOS/ESTUDIO/UNIVERSIDAD/2do Semestre/Algoritmos/Proyecto/ProyectoFinal",
     "node.js.detected.package.eslint": "true",
