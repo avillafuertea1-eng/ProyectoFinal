@@ -17,10 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca84f74b-563c-4b3e-8867-3f2122e39999" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ProyectoFinal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProyectoFinal.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cajero.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Cajero.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cajero.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Cajero.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
       <updated>1791428760973</updated>
       <workItem from="1791428762805" duration="686000" />
       <workItem from="1791478715730" duration="7928000" />
-      <workItem from="1791598679885" duration="626000" />
+      <workItem from="1791598679885" duration="1811000" />
     </task>
     <servers />
   </component>
