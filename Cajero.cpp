@@ -5,16 +5,21 @@
 
 using namespace std;
 
+void diseño() {
+    cout << "----------------------------------------------------\n";
+}
+
 // Comprueba que la cuenta exista: devuelve 1 si existe, 0 si no existe
-int existeCuenta(string numero) {
+int existeCuenta(int numero) {
     ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num;
     int existe = 0;
+    string numero_str = std::to_string(numero);
 
     while (getline(archivo, linea)) {
         stringstream ss(linea);
         getline(ss, num, '|');
-        if (num == numero) {
+        if (num == numero_str) {
             existe = 1;
         }
     }
@@ -23,10 +28,11 @@ int existeCuenta(string numero) {
 }
 
 // Devuelve el saldo actual de una cuenta
-float obtenerSaldo(string numero) {
+float obtenerSaldo(int numero) {
     ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num, nom, tel, cor, saldo_str;
     float saldo = 0;
+    string numero_str = std::to_string(numero);
 
     while (getline(archivo, linea)) {
         stringstream ss(linea);
@@ -35,7 +41,7 @@ float obtenerSaldo(string numero) {
         getline(ss, tel, '|');
         getline(ss, cor, '|');
         getline(ss, saldo_str, '|');
-        if (num == numero) {
+        if (num == numero_str) {
             stringstream conv(saldo_str);
             conv >> saldo;
         }
@@ -45,15 +51,15 @@ float obtenerSaldo(string numero) {
 }
 
 // Devuelve el nombre de la persona de la cuenta
-string obtenerNombre(string numero) {
+string obtenerNombre(int numero) {
     ifstream archivo("cuentas/CTASMONETARIAS.txt");
-    string linea, num, nom, nombre = "";
+    string linea, num, nom, nombre = "", numero_str = std::to_string(numero);
 
     while (getline(archivo, linea)) {
         stringstream ss(linea);
         getline(ss, num, '|');
         getline(ss, nom, '|');
-        if (num == numero) {
+        if (num == numero_str) {
             nombre = nom;
         }
     }
@@ -63,9 +69,10 @@ string obtenerNombre(string numero) {
 
 // Suma 'monto' al saldo de la cuenta para restar se envia negativo
 
-int actualizarSaldo(string numero, float monto) {
+int actualizarSaldo(int numero, float monto) {
     ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num, nom, tel, cor, saldo_str, contenido = "";
+    string numero_str = std::to_string(numero);
     float saldo;
 
     while (getline(archivo, linea)) {
@@ -76,7 +83,7 @@ int actualizarSaldo(string numero, float monto) {
         getline(ss, cor, '|');
         getline(ss, saldo_str, '|');
 
-        if (num == numero) {
+        if (num == numero_str) {
             stringstream conv(saldo_str);
             conv >> saldo;
             saldo = saldo + monto;
@@ -118,18 +125,25 @@ float leerMonto(string mensaje) {
 // CREAR CUENTA MONETARIA
 int crearCuenta() {
     ofstream archivo;
-    string numero, nombre, telefono, correo;
+    int numero, telefono;
+    string nombre, correo;
 
+    diseño();
+    cout << "CREACION DE CUENTA\n";
     cout << "Ingrese numero de cuenta: ";
-    getline(cin, numero);
+    cin >> numero;
+    cin.ignore();
+    //getline(cin, numero);
 
     if (existeCuenta(numero) == 1) {
         cout << "Error: la cuenta ya existe." << endl;
     } else {
-        cout << "Ingrese nombre del cuentahabiente: ";
+        cout << "Ingrese nombre del cuenta habiente: ";
         getline(cin, nombre);
         cout << "Ingrese telefono: ";
-        getline(cin, telefono);
+        cin >> telefono;
+        cin.ignore();
+        //getline(cin, telefono);
         cout << "Ingrese correo electronico: ";
         getline(cin, correo);
 
@@ -145,16 +159,20 @@ int crearCuenta() {
             cout << "Cuenta creada correctamente." << endl;
         }
     }
+    diseño();
     return 0;
 }
 
 //OPERAR DEPOSITO
 int operarDeposito() {
-    string numero;
+    int numero;
     float monto;
 
+    diseño();
     cout << "Ingrese numero de cuenta: ";
-    getline(cin, numero);
+    cin >> numero;
+    cin.ignore();
+    //getline(cin, numero);
 
     if (existeCuenta(numero) == 0) {
         cout << "Error: la cuenta no existe." << endl;
@@ -163,16 +181,20 @@ int operarDeposito() {
         actualizarSaldo(numero, monto);
         cout << "Deposito realizado correctamente." << endl;
     }
+    diseño();
     return 0;
 }
 
 // OPERAR RETIRO
 int operarRetiro() {
-    string numero;
+    int numero;
     float monto;
 
+    diseño();
     cout << "Ingrese numero de cuenta: ";
-    getline(cin, numero);
+    cin >> numero;
+    cin.ignore();
+    //getline(cin, numero);
 
     if (existeCuenta(numero) == 0) {
         cout << "Error: la cuenta no existe." << endl;
@@ -185,18 +207,24 @@ int operarRetiro() {
             cout << "Retiro realizado correctamente." << endl;
         }
     }
+    diseño();
     return 0;
 }
 
 // REALIZAR TRANSFERENCIA
 int realizarTransferencia() {
-    string origen, destino;
+    int origen, destino;
     float monto;
 
+    diseño();
     cout << "Ingrese numero de cuenta origen: ";
-    getline(cin, origen);
+    cin >> origen;
+    cin.ignore();
+    //getline(cin, origen);
     cout << "Ingrese numero de cuenta destino: ";
-    getline(cin, destino);
+    cin >> destino;
+    cin.ignore();
+    //getline(cin, destino);
 
     if (existeCuenta(origen) == 0 || existeCuenta(destino) == 0) {
         cout << "Error: alguna de las cuentas no existe." << endl;
@@ -212,15 +240,19 @@ int realizarTransferencia() {
             cout << "Transferencia realizada correctamente." << endl;
         }
     }
+    diseño();
     return 0;
 }
 
 // CONSULTAR SALDO DE CUENTA
 int consultarSaldo() {
-    string numero;
+    int numero;
 
+    diseño();
     cout << "Ingrese numero de cuenta: ";
-    getline(cin, numero);
+    cin >> numero;
+    cin.ignore();
+    //getline(cin, numero);
 
     if (existeCuenta(numero) == 0) {
         cout << "Error: la cuenta no existe." << endl;
@@ -231,6 +263,7 @@ int consultarSaldo() {
         cout << "Titular: " << obtenerNombre(numero) << endl;
         cout << "Saldo: Q " << obtenerSaldo(numero) << endl;
     }
+    diseño();
     return 0;
 }
 
@@ -245,6 +278,7 @@ int main() {
 
     while (opcion != 6) {
         cout << endl;
+        diseño();
         cout << "===== CUENTAS MONETARIAS =====" << endl;
         cout << "1. Crear cuenta monetaria" << endl;
         cout << "2. Operar deposito" << endl;
@@ -252,6 +286,7 @@ int main() {
         cout << "4. Realizar transferencia" << endl;
         cout << "5. Consultar saldo de cuenta" << endl;
         cout << "6. Salir" << endl;
+        diseño();
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         cin.ignore();   // elimina del buffer el enter de la opcion
@@ -264,7 +299,7 @@ int main() {
             case 3: operarRetiro(); break;
             case 4: realizarTransferencia(); break;
             case 5: consultarSaldo(); break;
-            case 6: break;
+            case 6: diseño(); cout << "Esperamos su regreso\n"; diseño(); break;
             default: cout << "Opcion no valida"; break;
         }
     }
