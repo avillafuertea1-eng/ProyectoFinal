@@ -5,69 +5,226 @@
 
 using namespace std;
 
-//Cuando trabajen en su parte coloquen su nombre y apellido en donde dice "Nombre:", asi sabemos quien trabajo en su parte
+// Comprueba que la cuenta exista: devuelve 1 si existe, 0 si no existe
+int existeCuenta(string numero) {
+    ifstream archivo("CTASMONETARIAS.txt");
+    string linea, num;
+    int existe = 0;
 
-//Nombre:
-//Crear una cuenta monetaria
-void crearCuenta() {
-
+    while (getline(archivo, linea)) {
+        stringstream ss(linea);
+        getline(ss, num, '|');
+        if (num == numero) {
+            existe = 1;
+        }
+    }
+    archivo.close();
+    return existe;
 }
 
-//Nombre:
-//Operar deposito
-void deposito() {
+// Devuelve el saldo actual de una cuenta
+float obtenerSaldo(string numero) {
+    ifstream archivo("CTASMONETARIAS.txt");
+    string linea, num, nom, tel, cor, saldo_str;
+    float saldo = 0;
 
+    while (getline(archivo, linea)) {
+        stringstream ss(linea);
+        getline(ss, num, '|');
+        getline(ss, nom, '|');
+        getline(ss, tel, '|');
+        getline(ss, cor, '|');
+        getline(ss, saldo_str, '|');
+        if (num == numero) {
+            stringstream conv(saldo_str);
+            conv >> saldo;
+        }
+    }
+    archivo.close();
+    return saldo;
 }
 
-//Nombre:
-//Operar retiro
-void retiro() {string numCuentaBusqueda;
-    double montoRetiro;
+// Devuelve el nombre de la persona de la cuenta
+string obtenerNombre(string numero) {
+    ifstream archivo("CTASMONETARIAS.txt");
+    string linea, num, nom, nombre = "";
 
-    cout << "\n=== OPERAR RETIRO ===\n";
-    cout << "Ingrese el numero de cuenta: ";
-    cin >> numCuentaBusqueda;
-
-    cout << "Ingrese el monto a retirar: ";
-    cin >> montoRetiro;
-
-    // Validar que el monto sea positivo (MONTO > 0)
-    if (montoRetiro <= 0) {
-        cout << "Error: El monto a retirar debe ser mayor a 0.\n";
-        return;
+    while (getline(archivo, linea)) {
+        stringstream ss(linea);
+        getline(ss, num, '|');
+        getline(ss, nom, '|');
+        if (num == numero) {
+            nombre = nom;
+        }
     }
-
+    archivo.close();
+    return nombre;
 }
 
-//Nombre: Fernando Mencos
-//Realizar Transferencias
-void transferencia() {
-    string cuentaOrigen, cuentaDestino;
-    double monto = 0.0;
+// Suma 'monto' al saldo de la cuenta para restar se envia negativo
 
-    cout << "\n--- REALIZAR TRANSFERENCIA ---\n";
-    cout << "Ingrese el numero de cuenta origen: ";
-    cin >> cuentaOrigen;
+int actualizarSaldo(string numero, float monto) {
+    ifstream archivo("CTASMONETARIAS.txt");
+    string linea, num, nom, tel, cor, saldo_str, contenido = "";
+    float saldo;
 
-    cout << "Ingrese el numero de cuenta destino: ";
-    cin >> cuentaDestino;
+    while (getline(archivo, linea)) {
+        stringstream ss(linea);
+        getline(ss, num, '|');
+        getline(ss, nom, '|');
+        getline(ss, tel, '|');
+        getline(ss, cor, '|');
+        getline(ss, saldo_str, '|');
 
-    // Validar que las cuentas origen y destino sean distintas
-    if (cuentaOrigen == cuentaDestino) {
-        cout << "Error: La cuenta origen y la cuenta destino deben ser distintas.\n";
-        return;
+        if (num == numero) {
+            stringstream conv(saldo_str);
+            conv >> saldo;
+            saldo = saldo + monto;
+
+            stringstream sal;
+            sal.setf(ios::fixed);
+            sal.precision(2);
+            sal << saldo;
+            saldo_str = sal.str();
+        }
+        contenido = contenido + num + "|" + nom + "|" + tel + "|" + cor + "|" + saldo_str + "\n";
     }
-    cout << "Ingrese el monto a transferir: ";
-    cin >> monto;
+    archivo.close();
 
-    // Validar que el monto sea mayor a 0
-    if (monto <= 0) {
-        cout << "Error: El monto a transferir debe ser mayor a 0.\n";
-        return;
+    ofstream salida("CTASMONETARIAS.txt");   // Reemplaza el contenido
+    salida << contenido;
+    salida.close();
+    return 0;
+}
+
+// Montos: solo valores positivos se permiten decimales
+float leerMonto(string mensaje) {
+    string texto;
+    float monto = 0;
+
+    while (monto <= 0) {
+        monto = 0;
+        cout << mensaje;
+        getline(cin, texto);
+        stringstream ss(texto);
+        ss >> monto;
+        if (monto <= 0) {
+            cout << "Error: ingrese un monto numerico mayor que 0." << endl;
+        }
     }
+    return monto;
+}
 
-//Nombre:
-//Consultar saldo de la cuenta
+// =====================================================================
+// CREAR CUENTA MONETARIA
+// =====================================================================
+int crearCuenta() {
+    ofstream archivo;
+    string numero, nombre, telefono, correo;
+
+    cout << "Ingrese numero de cuenta: ";
+    getline(cin, numero);
+
+    if (existeCuenta(numero) == 1) {
+        cout << "Error: la cuenta ya existe." << endl;
+    } else {
+        cout << "Ingrese nombre del cuentahabiente: ";
+        getline(cin, nombre);
+        cout << "Ingrese telefono: ";
+        getline(cin, telefono);
+        cout << "Ingrese correo electronico: ";
+        getline(cin, correo);
+
+        // Abrir archivo en modo append (ios::app)
+        archivo.open("CTASMONETARIAS.txt", ios::app);
+
+        if (!archivo) {
+            cout << "No se pudo abrir el archivo." << endl;
+        } else {
+            archivo << numero << "|" << nombre << "|" << telefono << "|" << correo << "|" << "0" << endl;
+            archivo.close();
+            cout << "Cuenta creada correctamente." << endl;
+        }
+    }
+    return 0;
+}
+
+// =====================================================================
+//OPERAR DEPOSITO
+// =====================================================================
+int operarDeposito() {
+    string numero;
+    float monto;
+
+    cout << "Ingrese numero de cuenta: ";
+    getline(cin, numero);
+
+    if (existeCuenta(numero) == 0) {
+        cout << "Error: la cuenta no existe." << endl;
+    } else {
+        monto = leerMonto("Ingrese monto del deposito: ");
+        actualizarSaldo(numero, monto);
+        cout << "Deposito realizado correctamente." << endl;
+    }
+    return 0;
+}
+
+// =====================================================================
+// OPERAR RETIRO
+// =====================================================================
+int operarRetiro() {
+    string numero;
+    float monto;
+
+    cout << "Ingrese numero de cuenta: ";
+    getline(cin, numero);
+
+    if (existeCuenta(numero) == 0) {
+        cout << "Error: la cuenta no existe." << endl;
+    } else {
+        monto = leerMonto("Ingrese monto del retiro: ");
+        if (monto > obtenerSaldo(numero)) {
+            cout << "Error: saldo insuficiente. No se realizo el retiro." << endl;
+        } else {
+            actualizarSaldo(numero, -monto);
+            cout << "Retiro realizado correctamente." << endl;
+        }
+    }
+    return 0;
+}
+
+// =====================================================================
+// REALIZAR TRANSFERENCIA
+// =====================================================================
+int realizarTransferencia() {
+    string origen, destino;
+    float monto;
+
+    cout << "Ingrese numero de cuenta origen: ";
+    getline(cin, origen);
+    cout << "Ingrese numero de cuenta destino: ";
+    getline(cin, destino);
+
+    if (existeCuenta(origen) == 0 || existeCuenta(destino) == 0) {
+        cout << "Error: alguna de las cuentas no existe." << endl;
+    } else if (origen == destino) {
+        cout << "Error: las cuentas origen y destino deben ser distintas." << endl;
+    } else {
+        monto = leerMonto("Ingrese monto de la transferencia: ");
+        if (monto > obtenerSaldo(origen)) {
+            cout << "Error: saldo insuficiente en la cuenta origen." << endl;
+        } else {
+            actualizarSaldo(origen, -monto);
+            actualizarSaldo(destino, monto);
+            cout << "Transferencia realizada correctamente." << endl;
+        }
+    }
+    return 0;
+}
+
+// =====================================================================
+// CONSULTAR SALDO DE CUENTA
+// =====================================================================
 int consultarSaldo() {
     string numero;
 
@@ -86,32 +243,42 @@ int consultarSaldo() {
     return 0;
 }
 
-
+// =====================================================================
+// MENU PRINCIPAL
+// =====================================================================
 int main() {
-    //Menu principal
-    int opcion; //se puede cambiar si no es viable
-    do {
-        //Menu de opciones
-        cout << "\nSISTEMA DE CUENTAS MONETARIAS\n";
-        cout << "1. Crear cuenta monetaria\n";
-        cout << "2. Operar deposito\n";
-        cout << "3. Operar retiro\n";
-        cout << "4. Realizar transferencia\n";
-        cout << "5. Consultar saldo de cuenta\n";
-        cout << "6. Salir\n";
-        cout << "Opcion: ";
+    int opcion = 0;
+    ofstream archivo;
+
+    // Si el archivo no existe, se crea desde el inicio (modo append)
+    archivo.open("CTASMONETARIAS.txt", ios::app);
+    archivo.close();
+
+    while (opcion != 6) {
+        cout << endl;
+        cout << "===== CUENTAS MONETARIAS =====" << endl;
+        cout << "1. Crear cuenta monetaria" << endl;
+        cout << "2. Operar deposito" << endl;
+        cout << "3. Operar retiro" << endl;
+        cout << "4. Realizar transferencia" << endl;
+        cout << "5. Consultar saldo de cuenta" << endl;
+        cout << "6. Salir" << endl;
+        cout << "Seleccione una opcion: ";
         cin >> opcion;
+        cin.ignore();   // elimina del buffer el enter de la opcion
+        cout << endl;
+
 
         switch (opcion) {
-            case 1:crearCuenta();break;
-            case 2:deposito();break;
-            case 3:retiro();break;
-            case 4:transferencia();break;
-            case 5:consultarSaldo();break;
-            case 6:cout << "Salida programa";break;
-            default:cout << "Opcion no valida.\n";
+            case 1: crearCuenta(); break;
+            case 2: operarDeposito(); break;
+            case 3: operarRetiro(); break;
+            case 4: realizarTransferencia(); break;
+            case 5: consultarSaldo(); break;
+            case 6: break;
+            default: cout << "Opcion no valida"; break;
         }
-    }while (opcion != 6);
+    }
 
     return 0;
 }
