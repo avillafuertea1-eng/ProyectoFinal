@@ -39,11 +39,32 @@ void retiro() {string numCuentaBusqueda;
 
 }
 
-//Nombre:
+//Nombre: Fernando Mencos
 //Realizar Transferencias
 void transferencia() {
+    string cuentaOrigen, cuentaDestino;
+    double monto = 0.0;
 
-}
+    cout << "\n--- REALIZAR TRANSFERENCIA ---\n";
+    cout << "Ingrese el numero de cuenta origen: ";
+    cin >> cuentaOrigen;
+
+    cout << "Ingrese el numero de cuenta destino: ";
+    cin >> cuentaDestino;
+
+    // Validar que las cuentas origen y destino sean distintas
+    if (cuentaOrigen == cuentaDestino) {
+        cout << "Error: La cuenta origen y la cuenta destino deben ser distintas.\n";
+        return;
+    }
+    cout << "Ingrese el monto a transferir: ";
+    cin >> monto;
+
+    // Validar que el monto sea mayor a 0
+    if (monto <= 0) {
+        cout << "Error: El monto a transferir debe ser mayor a 0.\n";
+        return;
+    }
 
 //Nombre:
 //Consultar saldo de la cuenta
