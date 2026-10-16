@@ -17,7 +17,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca84f74b-563c-4b3e-8867-3f2122e39999" name="Changes" comment="" />
+    <list default="true" id="ca84f74b-563c-4b3e-8867-3f2122e39999" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cajero.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Cajero.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cajero.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Cajero.exe" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +52,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;C/C++ File.Cajero.cpp.executor&quot;: &quot;Debug&quot;,
+    &quot;C/C++ File.Cajero.cpp.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -94,6 +98,8 @@
       <updated>1791428760973</updated>
       <workItem from="1791428762805" duration="686000" />
       <workItem from="1792010683537" duration="2173000" />
+      <workItem from="1792101858154" duration="657000" />
+      <workItem from="1792114490204" duration="1135000" />
     </task>
     <servers />
   </component>
