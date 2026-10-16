@@ -31,7 +31,7 @@ int existeCuenta(int numero) {
         return existe;
     }
 
-    string numero_str = std::to_string(numero);
+    string numero_str = to_string(numero);
     ifstream archivo("cuentas/CTASMONETARIAS.txt");
     string linea, num;
 
@@ -148,7 +148,7 @@ int crearCuenta() {
     string nombre, correo;
 
     diseno();
-    
+
     cout << "CREACION DE CUENTA\n";
     cout << "Ingrese numero de cuenta: ";
 
